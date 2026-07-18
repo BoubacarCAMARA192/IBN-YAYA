@@ -57,6 +57,29 @@ router.delete('/admin/photos/:id', basicAuth, (req, res) => {
   res.json({ success: true });
 });
 
+router.get('/prieres', (req, res) => {
+  res.json(db.getPrieres());
+});
+
+router.post('/prieres', (req, res) => {
+  const { name, message } = req.body;
+  if (!name || !message) return res.status(400).json({ error: 'Nom et message requis' });
+  const total = db.ajouterPriere(name.trim(), message.trim());
+  res.json({ success: true, total });
+});
+
+router.get('/prieres/count', (req, res) => {
+  res.json({ prieres: db.compterPrieres() });
+});
+
+router.get('/livre', (req, res) => {
+  res.json(db.getLivre());
+});
+
+router.get('/livre/chapitres', (req, res) => {
+  res.json(db.getLivreChapitres());
+});
+
 router.get('/admin/stats', basicAuth, (req, res) => {
   res.json(db.getStats());
 });

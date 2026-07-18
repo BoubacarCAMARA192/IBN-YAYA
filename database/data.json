@@ -13,13 +13,57 @@
     { "id": 5, "lit_by": "Aminata", "created_at": "2026-07-18T20:04:00.000Z" }
   ],
   "photos": [],
-  "admins": [
-    { "id": 1, "username": "admin", "password": "yaya2026" }
+  "prieres": [
+    { "id": 1, "name": "Boubacar", "message": "Papa, cette prière est pour toi. Sincère comme ton amour, éternelle comme ton souvenir.", "created_at": "2026-07-18T20:00:00.000Z" },
+    { "id": 2, "name": "Maman", "message": "Yaya, tu restes dans nos prières. Repose en paix.", "created_at": "2026-07-18T20:01:00.000Z" }
   ],
+  "livre": {
+    "titre": "De Père à Fils : Les Enseignements d'une Vie",
+    "auteur": "Yaya Camara",
+    "dedicace": "À mes enfants bien-aimés, vous qui êtes la lumière de mes yeux et la fierté de mon cœur. Ce livre est l'héritage de mon âme, les mots que je n'ai pas toujours su dire, mais que j'ai toujours portés en moi.",
+    "chapitres": [
+      {
+        "ordre": 1,
+        "titre": "L'Amour d'un Père",
+        "contenu": "Mes chers enfants, sachez que l'amour d'un père est comme les racines d'un baobab : invisibles mais si profonds qu'ils nourrissent l'arbre tout entier même quand la tempête fait rage. Je vous ai aimés avant même de vous voir, avant même d'entendre vos premiers cris. Chaque nuit blanche, chaque sacrifice, chaque prière était pour vous. Ne doutez jamais de cet amour, car il est la seule chose qui traverse le temps et l'espace, même au-delà de la mort."
+      },
+      {
+        "ordre": 2,
+        "titre": "Le Courage d'Apprendre",
+        "contenu": "Mes enfants, n'ayez jamais peur d'apprendre. La connaissance est la seule richesse que personne ne pourra jamais vous voler. J'ai sacrifié tant de choses pour que vous puissiez étudier, non pas pour que vous soyez les plus riches, mais pour que vous soyez libres. Libres de comprendre le monde, libres de choisir votre chemin, libres de vous élever. Un homme sans savoir est comme un oiseau sans ailes. Alors étudiez, lisez, questionnez. Le savoir est une lumière qui éclaire même les nuits les plus sombres."
+      },
+      {
+        "ordre": 3,
+        "titre": "La Foi, Notre Ancre",
+        "contenu": "Mes enfants, accrochez-vous à votre foi comme le naufragé s'accroche à son épave. La foi en Allah est la seule chose qui ne vous quittera jamais. Dans les moments de joie, remerciez. Dans les moments d'épreuve, patientez. La prière est votre bouclier, le Coran votre guide. N'oubliez jamais d'où vous venez et à Qui vous retournerez. Que chaque prosternation soit une élévation, que chaque jeûne soit une purification, que chaque aumône soit une bénédiction. La foi n'est pas un habit qu'on enfile le vendredi, c'est une lumière qui doit éclairer chacun de vos gestes."
+      },
+      {
+        "ordre": 4,
+        "titre": "Le Silence des Hommes",
+        "contenu": "Mes enfants, apprenez à vous taire. Dans le silence, il y a une sagesse que les mots ne peuvent atteindre. Le sage parle peu mais écoute beaucoup. Ne répondez pas à l'insulte par l'insulte, ne rendez pas le mal par le mal. Un homme fort n'est pas celui qui terrasse son adversaire, mais celui qui maîtrise sa colère. Dans ce monde, vous rencontrerez des gens qui voudront vous rabaisser, vous blesser, vous décourager. Ne leur donnez pas ce pouvoir. Restez dignes, restez silencieux, et laissez vos actions parler pour vous."
+      },
+      {
+        "ordre": 5,
+        "titre": "La Patience, Clé de la Victoire",
+        "contenu": "La patience, mes enfants, est la clé de toute victoire. Je vous ai vus grandir, j'ai vu vos luttes, vos pleurs, vos doutes. Mais je vous ai aussi vus vous relever, plus forts qu'avant. La vie n'est pas un chemin droit, elle est faite de virages, de montées, de descentes. Parfois vous tomberez, parfois vous pleurerez, parfois vous voudrez tout abandonner. Mais c'est dans ces moments que vous devez vous rappeler : après la nuit vient l'aube, après la pluie vient l'arc-en-ciel. Allah ne charge une âme que de ce qu'elle peut supporter."
+      },
+      {
+        "ordre": 6,
+        "titre": "L'Héritage du Cœur",
+        "contenu": "Je ne vous laisse ni or ni argent, mes enfants. Je vous laisse quelque chose de bien plus précieux : des valeurs. L'honnêteté, la générosité, le respect, l'humilité. Traitez les autres comme vous voudriez être traités. Aidez ceux qui sont dans le besoin, même si vous n'avez pas grand-chose. Un sourire est une aumône, une main tendue est une prière. Souvenez-vous que la vraie richesse n'est pas dans ce qu'on possède, mais dans ce qu'on donne. Et surtout, restez unis. La famille est un arbre dont les racines sont l'amour et les branches, vous tous. Si une branche se brise, l'arbre entier en souffre."
+      },
+      {
+        "ordre": 7,
+        "titre": "Le Voyage Continue",
+        "contenu": "Je suis parti, mais je ne vous ai pas quittés. Je suis dans chaque rayon de soleil qui réchauffe votre visage, dans chaque souffle de vent qui caresse votre peau, dans chaque étoile qui brille dans le ciel nocturne. Je suis dans vos souvenirs, dans vos rires, dans vos larmes. Je suis dans la fierté que vous ressentez quand vous réussissez, dans la force que vous trouvez quand vous êtes faibles. Ne me pleurez pas, mes enfants. Vivez, aimez, réussissez. Faites de votre vie un chef-d'œuvre qui honorera ma mémoire. Et quand vous penserez à moi, ne pleurez pas. Souriez, car je suis en paix, et je veillerai toujours sur vous, de l'autre côté du pont."
+      }
+    ]
+  },
   "_nextId": {
     "visitors": 1,
     "messages": 4,
     "candles": 6,
-    "photos": 1
+    "photos": 1,
+    "prieres": 3
   }
 }

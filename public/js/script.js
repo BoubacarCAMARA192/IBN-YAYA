@@ -1,3 +1,34 @@
+// ─── LOADING SCREEN ───
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loadingScreen').classList.add('hidden');
+  }, 1500);
+});
+
+// ─── THEME TOGGLE ───
+const themeToggle = document.getElementById('themeToggle');
+let isLight = false;
+themeToggle.addEventListener('click', () => {
+  isLight = !isLight;
+  document.body.classList.toggle('light-theme', isLight);
+  themeToggle.textContent = isLight ? '☀' : '☾';
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+});
+if (localStorage.getItem('theme') === 'light') {
+  document.body.classList.add('light-theme');
+  themeToggle.textContent = '☀';
+  isLight = true;
+}
+
+// ─── BACK TO TOP ───
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+  backToTop.classList.toggle('visible', window.scrollY > 500);
+});
+backToTop.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
 // ─── PARTICULES ───
 function createParticles() {
   const container = document.getElementById('particles');
@@ -40,6 +71,21 @@ function revealOnScroll() {
 }
 window.addEventListener('scroll', revealOnScroll);
 window.addEventListener('load', revealOnScroll);
+
+// ─── COUNTDOWN ───
+function updateCountdown() {
+  const departure = new Date('2017-09-10T03:00:00');
+  const now = new Date();
+  const diff = now - departure;
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  document.getElementById('heroCountdown').textContent =
+    `🕯 ${days} jours, ${hours} heures et ${minutes} minutes depuis ton départ`;
+  document.getElementById('daysSince').textContent = `${days} jours`;
+}
+updateCountdown();
+setInterval(updateCountdown, 60000);
 
 // ─── VISITEURS ───
 fetch('/api/visit', { method: 'POST' })
@@ -194,6 +240,103 @@ function uploadPhotos(event) {
     })
     .catch(() => alert('Erreur lors de l\'upload'))
     .finally(() => { event.target.value = ''; });
+}
+
+// ─── PIERRES (MEMORIAL STONES) ───
+function loadPrieres() {
+  const pile = document.getElementById('prieresPile');
+  const countEl = document.getElementById('prieresNumber');
+  fetch('/api/prieres')
+    .then(r => r.json())
+    .then(prieres => {
+      countEl.textContent = prieres.length;
+      if (prieres.length === 0) {
+        pile.innerHTML = '<div class="loading-msg">Sois le premier à déposer une prière.</div>';
+        return;
+      }
+      pile.innerHTML = prieres.map(p => `
+        <div class="priere-item">
+          <div>
+            <span class="priere-icon">🤲</span>
+            <span class="priere-name">${escapeHtml(p.name)}</span>
+            <span class="priere-date">${new Date(p.created_at).toLocaleDateString('fr-FR')}</span>
+          </div>
+          <div class="priere-message">${escapeHtml(p.message)}</div>
+        </div>
+      `).join('');
+    })
+    .catch(() => {
+      pile.innerHTML = '<div class="loading-msg">Impossible de charger les prières.</div>';
+    });
+}
+      loadPrieres();
+
+function submitPriere() {
+  const name = document.getElementById('priereName').value.trim();
+  const message = document.getElementById('priereMessage').value.trim();
+  if (!name || !message) {
+    alert('Veuillez remplir tous les champs.');
+    return;
+  }
+  const btn = document.querySelector('.prieres-form button');
+  btn.disabled = true;
+  btn.textContent = 'Dépôt en cours...';
+
+  fetch('/api/prieres', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, message })
+  })
+  .then(r => r.json())
+  .then(d => {
+    if (d.success) {
+      document.getElementById('priereName').value = '';
+      document.getElementById('priereMessage').value = '';
+loadPrieres();
+    }
+  })
+  .catch(() => alert('Erreur lors du dépôt.'))
+  .finally(() => {
+    btn.disabled = false;
+    btn.textContent = '🤲 Déposer ma prière';
+  });
+}
+
+// ─── LIVRE (BOOK) ───
+function loadLivre() {
+  const dedicaceEl = document.getElementById('livreDedicace');
+  const chapitresEl = document.getElementById('livreChapitres');
+
+  fetch('/api/livre')
+    .then(r => r.json())
+    .then(livre => {
+      dedicaceEl.textContent = livre.dedicace;
+
+      fetch('/api/livre/chapitres')
+        .then(r => r.json())
+        .then(chapitres => {
+          chapitresEl.innerHTML = chapitres.map((ch, i) => `
+            <div class="livre-chapitre" onclick="toggleChapitre(this)">
+              <div class="livre-chapitre-header">
+                <span class="livre-chapitre-num">${String(i + 1).padStart(2, '0')}</span>
+                <span class="livre-chapitre-titre">${escapeHtml(ch.titre)}</span>
+                <span class="livre-chapitre-toggle">▼</span>
+              </div>
+              <div class="livre-chapitre-contenu">
+                <p>${escapeHtml(ch.contenu)}</p>
+              </div>
+            </div>
+          `).join('');
+        });
+    })
+    .catch(() => {
+      chapitresEl.innerHTML = '<div class="loading-msg">Impossible de charger le livre.</div>';
+    });
+}
+loadLivre();
+
+function toggleChapitre(el) {
+  el.classList.toggle('open');
 }
 
 // ─── UTILS ───

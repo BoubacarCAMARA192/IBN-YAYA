@@ -85,6 +85,30 @@ function supprimerPhoto(id) {
   }
 }
 
+function getPrieres() {
+  return readData().prieres.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+}
+
+function ajouterPriere(name, message) {
+  const data = readData();
+  const priere = { id: data._nextId.prieres++, name, message, created_at: new Date().toISOString() };
+  data.prieres.push(priere);
+  writeData(data);
+  return data.prieres.length;
+}
+
+function compterPrieres() {
+  return readData().prieres.length;
+}
+
+function getLivreChapitres() {
+  return readData().livre.chapitres.sort((a, b) => a.ordre - b.ordre);
+}
+
+function getLivre() {
+  return readData().livre;
+}
+
 function getStats() {
   const data = readData();
   return {
@@ -92,7 +116,8 @@ function getStats() {
     messages: data.messages.length,
     pendingMessages: data.messages.filter(m => !m.approved).length,
     candles: data.candles.length,
-    photos: data.photos.length
+    photos: data.photos.length,
+    prieres: data.prieres.length
   };
 }
 
@@ -113,6 +138,11 @@ module.exports = {
   getPhotos,
   ajouterPhoto,
   supprimerPhoto,
+  getPrieres,
+  ajouterPriere,
+  compterPrieres,
+  getLivreChapitres,
+  getLivre,
   getStats,
   verifierAdmin
 };

@@ -8,7 +8,18 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-content">
+      <div class="loading-star">✧</div>
+      <div class="loading-text">À la mémoire de Yaya Camara</div>
+      <div class="loading-bar"><div class="loading-fill"></div></div>
+    </div>
+  </div>
+
   <div class="particles" id="particles"></div>
+
+  <button class="theme-toggle" id="themeToggle" aria-label="Changer le thème">☾</button>
+  <button class="back-to-top" id="backToTop" aria-label="Retour en haut">↑</button>
 
   <!-- Navigation -->
   <nav class="navbar" id="navbar">
@@ -19,7 +30,10 @@
         <a href="#biography">Biographie</a>
         <a href="#achievements">Parcours</a>
         <a href="#quran">Coran</a>
+        <a href="#prieres">Prières</a>
+        <a href="#livre">Livre</a>
         <a href="#guestbook">Livre d'or</a>
+        <a href="#candle">Bougie</a>
         <a href="#letter">Lettre</a>
         <a href="#gallery">Galerie</a>
       </div>
@@ -38,6 +52,7 @@
         <span class="date-sep">✦</span>
         <span>10 Septembre 2017</span>
       </div>
+      <div class="hero-countdown" id="heroCountdown"></div>
       <div class="hero-quote">"Ô mon Seigneur, fais-le entrer par la porte de la miséricorde, illumine sa tombe, et élève son rang parmi les bien-guidés."</div>
       <div class="hero-quote-arabic">رَبَّنَا اغْفِرْ لَنَا وَلِإِخْوَانِنَا الَّذِينَ سَبَقُونَا بِالْإِيمَانِ</div>
       <div class="visitor-counter" id="visitorCounter">👤 Chargement...</div>
@@ -80,6 +95,11 @@
             <div class="icon">⏰</div>
             <div class="label">Heure</div>
             <div class="value">03h00 du matin</div>
+          </div>
+          <div class="bio-detail-item">
+            <div class="icon">📅</div>
+            <div class="label">Depuis son départ</div>
+            <div class="value" id="daysSince">...</div>
           </div>
         </div>
       </div>
@@ -149,6 +169,48 @@
       <h2 class="section-title">Al-<span>Fatiha</span></h2>
       <div class="fatiha-arabic">الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ<br>الرَّحْمَٰنِ الرَّحِيمِ<br>مَالِكِ يَوْمِ الدِّينِ<br>إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ<br>اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ<br>صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ<br>غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ</div>
       <p class="fatiha-text">À la mémoire de mon père Yaya Camara et de tous nos défunts. Qu'Allah leur accorde Sa miséricorde infinie et les accueille dans Son Paradis éternel. Âmin.</p>
+    </div>
+  </section>
+
+  <!-- Prières (Memorial Stones) -->
+  <section class="section prieres-section" id="prieres">
+    <div class="reveal">
+      <h2 class="section-title">Prières <span>du Souvenir</span></h2>
+      <p class="section-subtitle">Dépose une prière en mémoire de Yaya Camara — chaque prière est une lumière pour son âme</p>
+
+      <div class="prieres-form">
+        <input type="text" id="priereName" placeholder="Ton nom" maxlength="50">
+        <textarea id="priereMessage" placeholder="Ta prière ou ton message..." rows="3" maxlength="300"></textarea>
+        <button onclick="submitPriere()">🤲 Déposer ma prière</button>
+      </div>
+
+      <div class="prieres-count" id="prieresCount">
+        <span class="prieres-number" id="prieresNumber">0</span> prieres déposées
+      </div>
+
+      <div class="prieres-pile" id="prieresPile">
+        <div class="loading-msg">Chargement des prieres...</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Livre (Book from Father to Children) -->
+  <section class="section livre-section" id="livre">
+    <div class="reveal">
+      <div class="livre-icon">📖</div>
+      <h2 class="section-title">De Père à <span>Fils</span></h2>
+      <p class="section-subtitle">Les enseignements d'une vie — un livre de Yaya Camara à ses enfants</p>
+
+      <div class="livre-container">
+        <div class="livre-dedicace">
+          <div class="dedicace-icon">✉</div>
+          <p id="livreDedicace">Chargement...</p>
+        </div>
+
+        <div class="livre-chapitres" id="livreChapitres">
+          <div class="loading-msg">Chargement du livre...</div>
+        </div>
+      </div>
     </div>
   </section>
 

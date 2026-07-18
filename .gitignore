@@ -3,3 +3,6 @@ uploads/*
 !uploads/.gitkeep
 .vercel
 server.log
+server.err
+*.db-shm
+*.db-wal
