@@ -1,4 +1,4 @@
-﻿const fs = require('fs');
+const fs = require('fs');
 const path = require('path');
 
 const DATA_PATH = process.env.DATA_PATH || path.join(__dirname, 'data.json');
