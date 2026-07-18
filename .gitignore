@@ -1,8 +1,3 @@
-node_modules/
-database/tribute.db
-database/tribute.db-shm
-database/tribute.db-wal
-database/*.db
+﻿node_modules/
 uploads/*
 !uploads/.gitkeep
-.env

@@ -1,0 +1,25 @@
+﻿{
+  "visitors": [],
+  "messages": [
+    { "id": 1, "name": "Boubacar Camara", "content": "Papa, tu resteras à jamais dans mon cœur. Chaque réussite de ma vie, je te la dédie. Que la paix soit sur ton âme.", "approved": 1, "created_at": "2026-07-18T20:00:00.000Z" },
+    { "id": 2, "name": "La Famille Camara", "content": "Yaya, tu nous as quittés mais ton sourire et ta bienveillance restent gravés dans nos mémoires. Repose en paix, cher frère.", "approved": 1, "created_at": "2026-07-18T20:01:00.000Z" },
+    { "id": 3, "name": "Un Ami", "content": "Homme de foi et de valeurs, Yaya était un exemple pour tous ceux qui l'ont connu. Qu'Allah l'accueille dans Son Paradis.", "approved": 1, "created_at": "2026-07-18T20:02:00.000Z" }
+  ],
+  "candles": [
+    { "id": 1, "lit_by": "Boubacar", "created_at": "2026-07-18T20:00:00.000Z" },
+    { "id": 2, "lit_by": "Maman", "created_at": "2026-07-18T20:01:00.000Z" },
+    { "id": 3, "lit_by": "Fatou", "created_at": "2026-07-18T20:02:00.000Z" },
+    { "id": 4, "lit_by": "Amadou", "created_at": "2026-07-18T20:03:00.000Z" },
+    { "id": 5, "lit_by": "Aminata", "created_at": "2026-07-18T20:04:00.000Z" }
+  ],
+  "photos": [],
+  "admins": [
+    { "id": 1, "username": "admin", "password": "yaya2026" }
+  ],
+  "_nextId": {
+    "visitors": 1,
+    "messages": 4,
+    "candles": 6,
+    "photos": 1
+  }
+}

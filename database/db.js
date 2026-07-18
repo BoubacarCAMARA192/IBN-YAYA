@@ -1,71 +1,118 @@
-const Database = require('better-sqlite3');
+﻿const fs = require('fs');
 const path = require('path');
-const fs = require('fs');
 
-const dbDir = process.env.DB_PATH ? path.dirname(process.env.DB_PATH) : path.join(__dirname);
-const dbPath = process.env.DB_PATH || path.join(dbDir, 'tribute.db');
+const DATA_PATH = process.env.DATA_PATH || path.join(__dirname, 'data.json');
 
-const db = new Database(dbPath);
-
-db.pragma('journal_mode = WAL');
-db.pragma('foreign_keys = ON');
-
-db.exec(`
-  CREATE TABLE IF NOT EXISTS visitors (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    ip TEXT NOT NULL,
-    visit_date DATETIME DEFAULT CURRENT_TIMESTAMP
-  );
-
-  CREATE TABLE IF NOT EXISTS messages (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    content TEXT NOT NULL,
-    approved INTEGER DEFAULT 0,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-  );
-
-  CREATE TABLE IF NOT EXISTS candles (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    lit_by TEXT DEFAULT 'Anonyme',
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-  );
-
-  CREATE TABLE IF NOT EXISTS photos (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    filename TEXT NOT NULL,
-    caption TEXT DEFAULT '',
-    uploaded_at DATETIME DEFAULT CURRENT_TIMESTAMP
-  );
-
-  CREATE TABLE IF NOT EXISTS admins (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT NOT NULL UNIQUE,
-    password TEXT NOT NULL
-  );
-`);
-
-const insertDefaultAdmin = db.prepare(`
-  INSERT OR IGNORE INTO admins (username, password) VALUES (?, ?)
-`);
-insertDefaultAdmin.run('admin', 'yaya2026');
-
-// ─── DONNÉES STATIQUES (seed) ───
-const msgCount = db.prepare('SELECT COUNT(*) as c FROM messages').get().c;
-if (msgCount === 0) {
-  const seedMessages = [
-    { name: 'Boubacar Camara', content: 'Papa, tu resteras à jamais dans mon cœur. Chaque réussite de ma vie, je te la dédie. Que la paix soit sur ton âme.' },
-    { name: 'La Famille Camara', content: 'Yaya, tu nous as quittés mais ton sourire et ta bienveillance restent gravés dans nos mémoires. Repose en paix, cher frère.' },
-    { name: 'Un Ami', content: 'Homme de foi et de valeurs, Yaya était un exemple pour tous ceux qui l\'ont connu. Qu\'Allah l\'accueille dans Son Paradis.' },
-  ];
-  const insertMsg = db.prepare('INSERT INTO messages (name, content, approved) VALUES (?, ?, 1)');
-  seedMessages.forEach(m => insertMsg.run(m.name, m.content));
-
-  const seedCandles = [
-    'Boubacar', 'Maman', 'Fatou', 'Amadou', 'Aminata'
-  ];
-  const insertCandle = db.prepare('INSERT INTO candles (lit_by) VALUES (?)');
-  seedCandles.forEach(c => insertCandle.run(c));
+function readData() {
+  return JSON.parse(fs.readFileSync(DATA_PATH, 'utf-8'));
 }
 
-module.exports = db;
+function writeData(data) {
+  fs.writeFileSync(DATA_PATH, JSON.stringify(data, null, 2), 'utf-8');
+}
+
+function ajouterVisiteur(ip) {
+  const data = readData();
+  data.visitors.push({ id: data._nextId.visitors++, ip, visit_date: new Date().toISOString() });
+  writeData(data);
+  return data.visitors.length;
+}
+
+function compterVisiteurs() {
+  return readData().visitors.length;
+}
+
+function getMessages(approuvesSeulement) {
+  const data = readData();
+  let msgs = data.messages;
+  if (approuvesSeulement) msgs = msgs.filter(m => m.approved);
+  return msgs.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+}
+
+function ajouterMessage(name, content) {
+  const data = readData();
+  const msg = { id: data._nextId.messages++, name, content, approved: 0, created_at: new Date().toISOString() };
+  data.messages.push(msg);
+  writeData(data);
+  return msg.id;
+}
+
+function approuverMessage(id) {
+  const data = readData();
+  const msg = data.messages.find(m => m.id === Number(id));
+  if (msg) msg.approved = 1;
+  writeData(data);
+}
+
+function supprimerMessage(id) {
+  const data = readData();
+  data.messages = data.messages.filter(m => m.id !== Number(id));
+  writeData(data);
+}
+
+function compterBougies() {
+  return readData().candles.length;
+}
+
+function ajouterBougie(name) {
+  const data = readData();
+  data.candles.push({ id: data._nextId.candles++, lit_by: name, created_at: new Date().toISOString() });
+  writeData(data);
+  return data.candles.length;
+}
+
+function getPhotos() {
+  return readData().photos.sort((a, b) => new Date(b.uploaded_at) - new Date(a.uploaded_at));
+}
+
+function ajouterPhoto(filename, caption) {
+  const data = readData();
+  const photo = { id: data._nextId.photos++, filename, caption, uploaded_at: new Date().toISOString() };
+  data.photos.push(photo);
+  writeData(data);
+  return photo.id;
+}
+
+function supprimerPhoto(id) {
+  const data = readData();
+  const idx = data.photos.findIndex(p => p.id === Number(id));
+  if (idx !== -1) {
+    const photo = data.photos[idx];
+    const filePath = path.join(__dirname, '..', 'uploads', photo.filename);
+    try { fs.unlinkSync(filePath); } catch (e) {}
+    data.photos.splice(idx, 1);
+    writeData(data);
+  }
+}
+
+function getStats() {
+  const data = readData();
+  return {
+    visitors: data.visitors.length,
+    messages: data.messages.length,
+    pendingMessages: data.messages.filter(m => !m.approved).length,
+    candles: data.candles.length,
+    photos: data.photos.length
+  };
+}
+
+function verifierAdmin(username, password) {
+  const data = readData();
+  return data.admins.some(a => a.username === username && a.password === password);
+}
+
+module.exports = {
+  ajouterVisiteur,
+  compterVisiteurs,
+  getMessages,
+  ajouterMessage,
+  approuverMessage,
+  supprimerMessage,
+  compterBougies,
+  ajouterBougie,
+  getPhotos,
+  ajouterPhoto,
+  supprimerPhoto,
+  getStats,
+  verifierAdmin
+};
