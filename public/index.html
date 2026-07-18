@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>À Mon Père - Yaya Camara</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="particles" id="particles"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo">Y.C <span>✧</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="#home">Accueil</a>
+        <a href="#biography">Biographie</a>
+        <a href="#achievements">Parcours</a>
+        <a href="#quran">Coran</a>
+        <a href="#guestbook">Livre d'or</a>
+        <a href="#letter">Lettre</a>
+        <a href="#gallery">Galerie</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-subtitle-top">À la mémoire de mon père</div>
+      <h1>Yaya <span>Camara</span></h1>
+      <div class="hero-dates">
+        <span>??/??/????</span>
+        <span class="date-sep">✦</span>
+        <span>10 Septembre 2017</span>
+      </div>
+      <div class="hero-quote">"Ô mon Seigneur, fais-le entrer par la porte de la miséricorde, illumine sa tombe, et élève son rang parmi les bien-guidés."</div>
+      <div class="hero-quote-arabic">رَبَّنَا اغْفِرْ لَنَا وَلِإِخْوَانِنَا الَّذِينَ سَبَقُونَا بِالْإِيمَانِ</div>
+      <div class="visitor-counter" id="visitorCounter">👤 Chargement...</div>
+    </div>
+    <div class="scroll-indicator" onclick="document.getElementById('biography').scrollIntoView({behavior:'smooth'})">
+      <div class="mouse"></div>
+      <span>DÉFILER</span>
+    </div>
+  </section>
+
+  <!-- Biography -->
+  <section class="section bio-section" id="biography">
+    <div class="bio-container reveal">
+      <h2 class="section-title">Mon <span>Père</span></h2>
+      <p class="section-subtitle">Un homme d'exception qui a façonné ma vie</p>
+      <div class="bio-card">
+        <p class="bio-text">
+          Le <strong>10 septembre 2017</strong>, à <strong>03h00 du matin</strong>, à <strong>Mancolicounda</strong>,
+          Allah a rappelé à Lui mon père bien-aimé, <strong>Yaya Camara</strong>.
+          Ce jour-là, une partie de mon cœur est partie avec lui.
+        </p>
+        <p class="bio-text" style="margin-top:1.5rem">
+          Mais son héritage, ses valeurs, son amour, et tout ce qu'il m'a enseigné
+          continuent de vivre à travers moi. Chaque réussite dans ma vie porte
+          l'empreinte de ses sacrifices, de sa patience et de son amour inconditionnel.
+          C'est grâce à lui que je suis devenu l'homme que je suis aujourd'hui.
+        </p>
+        <div class="bio-details">
+          <div class="bio-detail-item">
+            <div class="icon">🕊</div>
+            <div class="label">Rappelé à Allah</div>
+            <div class="value">10 Septembre 2017</div>
+          </div>
+          <div class="bio-detail-item">
+            <div class="icon">📍</div>
+            <div class="label">Lieu</div>
+            <div class="value">Mancolicounda</div>
+          </div>
+          <div class="bio-detail-item">
+            <div class="icon">⏰</div>
+            <div class="label">Heure</div>
+            <div class="value">03h00 du matin</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievements Timeline -->
+  <section class="section achievements-section" id="achievements">
+    <div class="reveal">
+      <h2 class="section-title">Mon <span>Parcours</span></h2>
+      <p class="section-subtitle">Des étapes que j'ai voulu partager avec toi, même en ton absence</p>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="content">
+            <div class="date">2019</div>
+            <div class="title">BFEM - 3ᵉ du Centre</div>
+            <div class="desc">J'ai décroché mon BFEM avec la <strong>3ᵉ place du centre</strong>. Ce jour-là, j'ai repensé à tous ces matins où tu me réveillais pour aller à l'école. Cette réussite, elle est aussi la tienne.</div>
+            <span class="achievement-badge">🏆 3ᵉ du Centre</span>
+          </div>
+          <div class="dot"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="content">
+            <div class="date">Après 2017</div>
+            <div class="title">Baccalauréat S2</div>
+            <div class="desc">J'ai obtenu mon Bac S2 en ton absence. Le jour des résultats, j'aurais tant voulu voir la fierté dans tes yeux. Mais je sais que là où tu es, tu veillais sur moi et étais fier.</div>
+            <span class="achievement-badge">📜 Bac S2</span>
+          </div>
+          <div class="dot"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="content">
+            <div class="date">Honneur</div>
+            <div class="title">Khatm du Saint Coran</div>
+            <div class="desc">J'ai eu l'immense honneur et la bénédiction de terminer la lecture complète du Saint Coran. Chaque verset était une prière pour toi, chaque sourate une lumière que j'espère voir illuminer ta tombe.</div>
+            <span class="achievement-badge">📖 Khatm Al-Quran</span>
+          </div>
+          <div class="dot"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quran Completion -->
+  <section class="section quran-section" id="quran">
+    <div class="quran-container reveal">
+      <div class="quran-icon">📖</div>
+      <h2 class="section-title">Khatm du <span>Saint Coran</span></h2>
+      <div class="quran-arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+      <div class="quran-arabic" style="font-size:clamp(1.5rem,3vw,2rem)">إِنَّا فَتَحْنَا لَكَ فَتْحًا مُّبِينًا</div>
+      <div class="quran-translation">"Nous t'avons accordé une victoire éclatante." (Sourate Al-Fath, 48:1)</div>
+      <div class="quran-achievement">
+        <h3>🔹 Terminer le Coran 🔹</h3>
+        <p>En ton absence, mon père, j'ai entrepris ce voyage spirituel. J'ai lu le Livre d'Allah d'un bout à l'autre, et à chaque page, j'ai fait une prière pour toi. Que chaque lettre lue soit une lumière dans ta tombe, une miséricorde sur ton âme, et une élévation de ton rang au Paradis.</p>
+        <ul class="checkmark-list">
+          <li>Lecture complète du Saint Coran</li>
+          <li>Chaque verset récité comme une prière pour toi</li>
+          <li>Que cela soit une lumière dans ta tombe</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fatiha -->
+  <section class="section fatiha-section" id="fatiha">
+    <div class="reveal">
+      <h2 class="section-title">Al-<span>Fatiha</span></h2>
+      <div class="fatiha-arabic">الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ<br>الرَّحْمَٰنِ الرَّحِيمِ<br>مَالِكِ يَوْمِ الدِّينِ<br>إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ<br>اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ<br>صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ<br>غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ</div>
+      <p class="fatiha-text">À la mémoire de mon père Yaya Camara et de tous nos défunts. Qu'Allah leur accorde Sa miséricorde infinie et les accueille dans Son Paradis éternel. Âmin.</p>
+    </div>
+  </section>
+
+  <!-- Guestbook -->
+  <section class="section guestbook-section" id="guestbook">
+    <div class="reveal">
+      <h2 class="section-title">Livre <span>d'Or</span></h2>
+      <p class="section-subtitle">Laisse un message pour la mémoire de Yaya Camara</p>
+
+      <div class="guestbook-form">
+        <input type="text" id="msgName" placeholder="Ton nom" maxlength="50">
+        <textarea id="msgContent" placeholder="Ton message..." rows="4" maxlength="500"></textarea>
+        <button onclick="submitMessage()">✉ Envoyer mon message</button>
+        <p class="form-note">Les messages seront visibles après modération.</p>
+      </div>
+
+      <div class="messages-list" id="messagesList">
+        <div class="loading-msg">Chargement des messages...</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Candle -->
+  <section class="section candle-section" id="candle">
+    <div class="reveal" style="text-align:center">
+      <h2 class="section-title">Une <span>Lumière</span> pour toi</h2>
+      <p class="section-subtitle">Chaque flamme est une prière</p>
+
+      <div class="candle-wrapper" id="candleWrapper" onclick="toggleCandle()">
+        <div class="candle-glow" id="candleGlow"></div>
+        <div class="flame" id="flame"></div>
+        <div class="candle-body"></div>
+      </div>
+
+      <div class="candle-controls">
+        <input type="text" id="candleName" placeholder="Ton nom (optionnel)" maxlength="50">
+        <button onclick="lightCandle()">✧ Allumer une bougie</button>
+      </div>
+
+      <div class="candle-stats">
+        <span id="candleCount">0</span> bougies allumées
+      </div>
+    </div>
+  </section>
+
+  <!-- Letter -->
+  <section class="section thanks-section" id="letter">
+    <div class="reveal">
+      <h2 class="section-title">Merci, <span>Papa</span></h2>
+      <p class="section-subtitle">Une lettre que je n'ai jamais pu te remettre</p>
+      <div class="letter-container">
+        <div class="letter-seal">✉</div>
+        <div class="letter-greeting">À mon cher père,</div>
+        <div class="letter-body">
+          <p>Papa, je ne sais pas par où commencer tant les mots me submergent. Depuis ton départ le 10 septembre 2017, chaque jour je pense à toi. Chaque réussite, chaque étape de ma vie, tu y es présent dans mon cœur.</p><br>
+          <p>Je me souviens de tout ce que tu as fait pour moi. Tes sacrifices, tes nuits blanches, ton amour inconditionnel. Tu as tout donné pour que je puisse étudier, pour que je devienne quelqu'un de bien. <em>Rien de ce que j'accomplis ne t'aurait échappé si tu étais encore parmi nous.</em></p><br>
+          <p>En 2019, quand j'ai obtenu mon BFEM avec la 3ᵉ place du centre, j'ai cherché ton regard dans la foule. En vain. Mais je savais que tu étais fier, là-haut. Quand j'ai eu mon Bac S2, j'aurais voulu t'appeler, entendre ta voix, partager cette joie avec toi.</p><br>
+          <p>Et puis, j'ai eu l'immense bénédiction de terminer le Saint Coran. Chaque verset était pour toi, papa. J'espère que cela t'apporte de la lumière, de la paix, et qu'Allah élève ton rang pour chaque lettre récitée.</p><br>
+          <p><em>Merci pour tout, papa. Merci pour ton amour, tes sacrifices, tes conseils. Tout ce que je suis, tout ce que je deviendrai, c'est grâce à toi.</em> Je continuerai à te rendre fier, inchaAllah. Tu restes à jamais vivant dans mon cœur.</p><br>
+          <p>Que la miséricorde d'Allah t'accompagne éternellement. Qu'Il illumine ta tombe, qu'Il élargisse ta demeure au Paradis, et qu'Il nous réunisse dans Son jardin éternel.</p><br>
+          <p style="text-align:center;font-size:1.2rem"><em>Âmin, Âmin, Âmin.</em></p>
+          <div class="letter-signature">Ton fils qui t'aime et ne t'oubliera jamais,<small>Boubacar Camara</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="section gallery-section" id="gallery">
+    <div class="reveal">
+      <h2 class="section-title">Galerie <span>Souvenir</span></h2>
+      <p class="section-subtitle">Ajoute ici les photos de toi et ton père</p>
+      <div class="gallery-grid" id="galleryGrid"></div>
+      <div class="gallery-upload-btn">
+        <button onclick="document.getElementById('photoInput').click()">➕ Ajouter une photo</button>
+        <input type="file" id="photoInput" accept="image/*" multiple style="display:none" onchange="uploadPhotos(event)">
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p><span class="footer-heart">❤</span> À mon père, <span class="footer-name">Yaya Camara</span> <span class="footer-heart">❤</span></p>
+    <p style="margin-top:0.8rem;font-size:0.8rem;opacity:0.6">"Notre Seigneur ! Accorde-leur Ton pardon et Ta miséricorde, car Tu es le Meilleur des Miséricordieux."<br><em>Al-Fatiha</em></p>
+  </footer>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>

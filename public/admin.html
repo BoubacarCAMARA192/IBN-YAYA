@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Hommage Yaya Camara</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #1A1A2E;
+      color: #E0D5C1;
+      padding: 2rem;
+    }
+    h1 { color: #D4AF37; margin-bottom: 2rem; font-size: 1.8rem; }
+    h1 small { display:block; font-size:0.9rem; color:#C4B998; font-weight:300; margin-top:0.3rem; }
+    .stats {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 12px; padding: 1.5rem; text-align: center;
+    }
+    .stat-card .num { font-size: 2rem; color: #D4AF37; font-weight: 700; }
+    .stat-card .lab { font-size: 0.8rem; color: #C4B998; margin-top: 0.3rem; text-transform: uppercase; letter-spacing: 1px; }
+    h2 { color: #D4AF37; font-size: 1.2rem; margin: 2rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(212,175,55,0.2); }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th, td { padding: 0.8rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    th { color: #D4AF37; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+    td { color: #E0D5C1; }
+    .pending { color: #F0D060; font-weight: 500; }
+    .approved { color: #4CAF50; }
+    .btn {
+      padding: 0.4rem 1rem; border: none; border-radius: 6px; cursor: pointer;
+      font-size: 0.8rem; font-family: inherit; transition: all 0.2s;
+    }
+    .btn-approve { background: #4CAF50; color: white; }
+    .btn-approve:hover { background: #45a049; }
+    .btn-delete { background: #f44336; color: white; }
+    .btn-delete:hover { background: #da190b; }
+    .empty { color: #7A7A8A; font-style: italic; padding: 2rem; text-align: center; }
+    .photo-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(150px,1fr)); gap: 1rem; }
+    .photo-item { position: relative; border-radius: 8px; overflow: hidden; aspect-ratio: 1; background: rgba(255,255,255,0.03); }
+    .photo-item img { width: 100%; height: 100%; object-fit: cover; }
+    .photo-item .del-btn {
+      position: absolute; top: 5px; right: 5px; background: rgba(244,67,54,0.8); color: white;
+      border: none; width: 24px; height: 24px; border-radius: 50%; cursor: pointer;
+      font-size: 14px; line-height: 24px; text-align: center;
+    }
+    .alert { padding: 1rem; border-radius: 8px; margin-bottom: 1rem; display: none; }
+    .alert-success { background: rgba(76,175,80,0.15); border: 1px solid #4CAF50; color: #4CAF50; display: block; }
+    .alert-error { background: rgba(244,67,54,0.15); border: 1px solid #f44336; color: #f44336; display: block; }
+  </style>
+</head>
+<body>
+  <h1>⚙ Administration <small>Hommage à Yaya Camara</small></h1>
+  <div class="alert" id="alert"></div>
+
+  <div class="stats" id="stats"></div>
+
+  <h2>📩 Messages en attente</h2>
+  <div id="pendingMessages"></div>
+
+  <h2>✅ Messages approuvés</h2>
+  <div id="approvedMessages"></div>
+
+  <h2>📷 Photos</h2>
+  <div class="photo-grid" id="photoGrid"></div>
+
+  <script>
+    const ADMIN_CRED = 'admin:yaya2026';
+    const headers = new Headers();
+    headers.set('Authorization', 'Basic ' + btoa(ADMIN_CRED));
+    headers.set('Content-Type', 'application/json');
+
+    function showAlert(msg, type) {
+      const a = document.getElementById('alert');
+      a.textContent = msg;
+      a.className = 'alert alert-' + type;
+      setTimeout(() => a.style.display = 'none', 3000);
+    }
+
+    loadStats();
+    loadMessages();
+    loadPhotos();
+
+    function loadStats() {
+      fetch('/api/admin/stats', { headers })
+        .then(r => r.json())
+        .then(d => {
+          document.getElementById('stats').innerHTML = `
+            <div class="stat-card"><div class="num">${d.visitors}</div><div class="lab">Visiteurs</div></div>
+            <div class="stat-card"><div class="num">${d.messages}</div><div class="lab">Messages</div></div>
+            <div class="stat-card"><div class="num">${d.pendingMessages}</div><div class="lab">En attente</div></div>
+            <div class="stat-card"><div class="num">${d.candles}</div><div class="lab">Bougies</div></div>
+            <div class="stat-card"><div class="num">${d.photos}</div><div class="lab">Photos</div></div>
+          `;
+        });
+    }
+
+    function loadMessages() {
+      fetch('/api/admin/messages', { headers })
+        .then(r => r.json())
+        .then(msgs => {
+          const pending = msgs.filter(m => !m.approved);
+          const approved = msgs.filter(m => m.approved);
+          renderMessages('pendingMessages', pending, true);
+          renderMessages('approvedMessages', approved, false);
+        });
+    }
+
+    function renderMessages(id, msgs, showApprove) {
+      const container = document.getElementById(id);
+      if (msgs.length === 0) {
+        container.innerHTML = '<div class="empty">Aucun message</div>';
+        return;
+      }
+      container.innerHTML = `<table>
+        <thead><tr><th>Nom</th><th>Message</th><th>Date</th><th>Action</th></tr></thead>
+        <tbody>${msgs.map(m => `<tr>
+          <td>${esc(m.name)}</td>
+          <td>${esc(m.content)}</td>
+          <td>${new Date(m.created_at).toLocaleDateString('fr-FR')}</td>
+          <td>${showApprove ? `<button class="btn btn-approve" onclick="approveMsg(${m.id})">✓ Approuver</button> ` : ''}
+              <button class="btn btn-delete" onclick="deleteMsg(${m.id})">✕ Supprimer</button></td>
+        </tr>`).join('')}</tbody></table>`;
+    }
+
+    function approveMsg(id) {
+      fetch(`/api/admin/messages/${id}/approve`, { method:'PUT', headers })
+        .then(r => r.json())
+        .then(() => { showAlert('Message approuvé', 'success'); loadMessages(); });
+    }
+
+    function deleteMsg(id) {
+      if (!confirm('Supprimer ce message ?')) return;
+      fetch(`/api/admin/messages/${id}`, { method:'DELETE', headers })
+        .then(r => r.json())
+        .then(() => { showAlert('Message supprimé', 'success'); loadMessages(); });
+    }
+
+    function loadPhotos() {
+      fetch('/api/photos')
+        .then(r => r.json())
+        .then(photos => {
+          const grid = document.getElementById('photoGrid');
+          if (photos.length === 0) {
+            grid.innerHTML = '<div class="empty">Aucune photo</div>';
+            return;
+          }
+          grid.innerHTML = photos.map(p => `
+            <div class="photo-item">
+              <img src="/uploads/${p.filename}" alt="${esc(p.caption)}" loading="lazy">
+              <button class="del-btn" onclick="deletePhoto(${p.id})">✕</button>
+            </div>
+          `).join('');
+        });
+    }
+
+    function deletePhoto(id) {
+      if (!confirm('Supprimer cette photo ?')) return;
+      fetch(`/api/admin/photos/${id}`, { method:'DELETE', headers })
+        .then(r => r.json())
+        .then(() => { showAlert('Photo supprimée', 'success'); loadPhotos(); });
+    }
+
+    function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  </script>
+</body>
+</html>
