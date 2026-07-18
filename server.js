@@ -12,9 +12,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+const uploadsDir = process.env.UPLOADS_PATH || path.join(__dirname, 'uploads');
+
 // Multer config pour upload photos
 const storage = multer.diskStorage({
-  destination: path.join(__dirname, 'uploads'),
+  destination: uploadsDir,
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname);
     const name = Date.now() + '-' + Math.round(Math.random() * 1E9) + ext;
@@ -56,7 +58,7 @@ app.post('/api/photos/upload', upload.single('photo'), (req, res) => {
 
 // Fichiers statiques
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static(uploadsDir));
 
 // SPA fallback
 app.get('*', (req, res) => {
