@@ -637,6 +637,70 @@ body.light-theme .navbar.scrolled {
 }
 .gallery-upload-btn button:hover { background: var(--gold); color: var(--dark); }
 
+/* ── DEVELOPPER ── */
+.dev-section {
+  background: linear-gradient(180deg, #1a1a2e 0%, var(--bg-primary) 100%);
+}
+.dev-container {
+  max-width: 800px; margin: 0 auto;
+}
+.dev-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 20px; padding: 2.5rem 3rem;
+  backdrop-filter: blur(10px);
+}
+.dev-header {
+  display: flex; align-items: center; gap: 1.5rem;
+  margin-bottom: 2rem; padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(212,175,55,0.15);
+}
+.dev-avatar {
+  width: 70px; height: 70px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem; color: var(--dark); font-weight: 700;
+  flex-shrink: 0;
+}
+.dev-info h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; color: var(--cream);
+}
+.dev-info .dev-email {
+  font-size: 0.85rem; color: var(--gold); font-weight: 300;
+  margin-top: 0.2rem;
+}
+.dev-info .dev-role {
+  font-size: 0.9rem; color: var(--text-muted); font-weight: 300;
+  margin-top: 0.3rem;
+}
+.dev-skills {
+  display: flex; flex-direction: column; gap: 0.8rem;
+}
+.dev-skill-item {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 0.8rem 1.2rem;
+  background: rgba(212,175,55,0.04);
+  border: 1px solid rgba(212,175,55,0.08);
+  border-radius: 10px;
+  transition: all 0.3s;
+}
+.dev-skill-item:hover {
+  border-color: var(--gold);
+  background: rgba(212,175,55,0.08);
+  transform: translateX(5px);
+}
+.dev-skill-icon {
+  font-size: 1.3rem; width: 30px; text-align: center;
+}
+.dev-skill-text {
+  font-size: 0.95rem; color: var(--text-light); font-weight: 300;
+  line-height: 1.4;
+}
+.dev-skill-text strong {
+  color: var(--gold-light); font-weight: 500;
+}
+
 /* ── FOOTER ── */
 footer {
   text-align: center; padding: 3rem 2rem;
@@ -645,6 +709,12 @@ footer {
 }
 footer .footer-heart { color: var(--maroon); }
 footer .footer-name { color: var(--gold); font-weight: 500; }
+footer .footer-dev {
+  margin-top: 0.8rem; font-size: 0.8rem; opacity: 0.7;
+}
+footer .footer-dev a {
+  color: var(--gold); text-decoration: none;
+}
 
 /* ── REVEAL ANIMATION ── */
 .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s ease; }
@@ -663,6 +733,8 @@ footer .footer-name { color: var(--gold); font-weight: 500; }
   .bio-details { grid-template-columns: 1fr; }
   .quran-achievement { padding: 1.8rem; }
   .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  .dev-card { padding: 1.5rem; }
+  .dev-header { flex-direction: column; text-align: center; gap: 1rem; }
   .theme-toggle { top: 80px; right: 15px; width: 38px; height: 38px; font-size: 1.1rem; }
   .back-to-top { bottom: 20px; right: 15px; width: 38px; height: 38px; font-size: 1.1rem; }
 }
