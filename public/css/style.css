@@ -638,9 +638,6 @@ body.light-theme .navbar.scrolled {
 .gallery-upload-btn button:hover { background: var(--gold); color: var(--dark); }
 
 /* ── DEVELOPPER ── */
-.dev-section {
-  background: linear-gradient(180deg, #1a1a2e 0%, var(--bg-primary) 100%);
-}
 .dev-container {
   max-width: 800px; margin: 0 auto;
 }
